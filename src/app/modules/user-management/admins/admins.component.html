@@ -1,0 +1,95 @@
+<div class="row" *ngIf="!hidden">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b">
+            <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">Admins</h3>
+            </div>
+            </div>
+            <div class="card-body">
+                <div class="pb-3">
+                  <div class="row">
+                    <div class="col-xl-6">
+                        <button type="button" class="btn btn-sm btn-primary" (click)="handleAddProfile()">
+                            Add Admin
+                        </button>
+                    </div>
+                    <div class="col-xl-6 all-admin-user align-self-center d-flex">
+                        <mat-checkbox color="primary" [(ngModel)]="companyUser" (change)="onChangeAdmin($event)">Display All Admins</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="admins">
+                        <ng-container matColumnDef="fullname">
+                            <mat-header-cell *matHeaderCellDef> Full Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="companyname">
+                          <mat-header-cell *matHeaderCellDef> Companies </mat-header-cell>
+                          <mat-cell *matCellDef="let element" [ngClass]="'font-weight-bold'"> {{element.companyname}} </mat-cell>
+                      </ng-container>
+                        <ng-container matColumnDef="stat">
+                            <mat-header-cell *matHeaderCellDef> Stat# </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.tags.length}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                            <a title="Edit Admin" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="handleEditClick(element._key)">
+                                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                                class="svg-icon svg-icon-md svg-icon-primary">
+                                </span>
+                            </a>
+                            
+                            <a title="Delete Admin" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="deleteAdmin(element._key)">
+                              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="false"
+                                class="svg-icon svg-icon-md svg-icon-danger">
+                              </span>
+                            </a>
+                            </mat-cell>
+                        </ng-container>
+            
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <div *ngIf="admins.data.length === 0">
+                        <p style="text-align: center;padding: 10px;">No records found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+*ngIf="hidden"
+  class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+  style="background-image: url('./assets/media/error/bg3.jpg'); height: 100%;zoom: 1;
+  display: block;
+  min-height: 80vh;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #0e1724;"
+>
+  <!--begin::Content-->
+  <div
+    class="px-10 px-md-30 py-10 py-md-0 d-flex flex-column justify-content-md-center"
+  >
+    <p class="display-4 font-weight-boldest text-white mb-12">
+      How did you get here
+    </p>
+    <p class="font-size-h1 font-weight-boldest text-dark-75">
+      Sorry you can't access the page you're looking for.
+    </p>
+    <p class="font-size-h4 line-height-md">
+      There may be a misspelling in the URL entered,<br />or the page you are
+      looking for may no longer exist.
+    </p>
+  </div>
+  <!--end::Content-->
+</div>
+<!-- end:: Error -->

@@ -1,0 +1,119 @@
+<app-reporting-filtering (onDatesPicked)="updateReportingFiltering($event)"></app-reporting-filtering>
+<!-- Chart Part-->
+<app-reporting-revenue-chart *ngIf="chartData"
+  [chartData]="chartData"></app-reporting-revenue-chart>
+
+  <ngx-datatable
+  #expandableTable
+  class="material fullscreen expandable"
+  style="top: 30px; height: 500px"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="0"
+  [rowHeight]="50"
+  [scrollbarV]="true"
+  [scrollbarH]="true"
+  [rows]="statData"
+>
+  <!-- Row Detail Template -->
+  <ngx-datatable-row-detail
+    [rowHeight]="100"
+    #myDetailRow
+    (toggle)="onDetailToggle($event)"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-row-detail-template
+    >
+      <div style="padding-left: 35px">
+        <div><strong>Address</strong></div>
+        <div>Test</div>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <!-- Column Templates -->
+  <ngx-datatable-column
+    [width]="50"
+    [resizeable]="false"
+    [sortable]="false"
+    [draggable]="false"
+    [canAutoResize]="false"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-cell-template
+    >
+      <a
+        href="javascript:void(0)"
+        [class.datatable-icon-right]="!expanded"
+        [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row"
+        (click)="toggleExpandRow(row)"
+      >
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Date -->
+  <ngx-datatable-column name="rptDate">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Date
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | date }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- SUBID -->
+  <ngx-datatable-column name="subid">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Subid
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Tag -->
+  <ngx-datatable-column name="tagname">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Tag
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Publisher -->
+  <ngx-datatable-column name="publisher">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Publisher
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Split -->
+  <ngx-datatable-column name="spilt">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Spilt
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        <strong>{{ (value | number) || (0 | number: '1.0-0') }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- REVENUE -->
+  <ngx-datatable-column name="revenue">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Revenue
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | currency: 'USD' }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

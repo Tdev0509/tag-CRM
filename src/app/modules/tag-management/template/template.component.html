@@ -1,0 +1,141 @@
+<div class="row" *ngIf="!hidden">
+    <div class="col-xl-12">
+      <div class="card card-custom example example-compact gutter-b">
+        <div class="card-header">
+          <div class="card-title">
+            <h3 class="card-label">View Templates</h3>
+          </div>
+        </div>
+        <div class="card-body">
+                   
+          <ngx-datatable
+            class="material fullscreen"
+            [rows]="rows"
+            [columnMode]="'force'"
+            [loadingIndicator]="loadingIndicator"
+            [footerHeight]="50"
+            [rowHeight]="50"
+            [scrollbarH]="true"
+            [headerHeight]="50"
+            [limit]="10"
+          >
+            <ngx-datatable-column name="TemplateName">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Template Name
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                Tag Name
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Company">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Company
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value[0].name }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Advertiser">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Advertiser
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Publisher">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Publisher
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Browser">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Browser
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Device Type">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Device Type
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Version">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Browser Version
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Country">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Country
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="id">
+              <ng-template ngx-datatable-header-template>Action</ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <!--button class="btn btn-sm btn-icon btn-icon-white btn-bg-primary m-1" (click)="editTemplate(row._key)">
+                    <i class="flaticon2-pen"></i>
+                </button-->
+                <a title="Delete Template" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="deleteTemplate(row._key)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="false"
+                    class="svg-icon svg-icon-md svg-icon-danger">
+                  </span>
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- begin:: Error -->
+<div
+*ngIf="hidden"
+  class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+  style="background-image: url('./assets/media/error/bg3.jpg'); height: 100%;zoom: 1;
+  display: block;
+  min-height: 80vh;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #0e1724;"
+>
+  <!--begin::Content-->
+  <div
+    class="px-10 px-md-30 py-10 py-md-0 d-flex flex-column justify-content-md-center"
+  >
+    <p class="display-4 font-weight-boldest text-white mb-12">
+      How did you get here
+    </p>
+    <p class="font-size-h1 font-weight-boldest text-dark-75">
+      Sorry you can't access the page you're looking for.
+    </p>
+    <p class="font-size-h4 line-height-md">
+      There may be a misspelling in the URL entered,<br />or the page you are
+      looking for may no longer exist.
+    </p>
+  </div>
+  <!--end::Content-->
+</div>
+<!-- end:: Error -->
+  

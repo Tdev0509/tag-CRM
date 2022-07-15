@@ -1,0 +1,129 @@
+<div class="row">
+  <!-- STARTING UPDATE PROFILE-->
+  <div class="col-xl-6">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h3 class="card-label">Update Profile</h3>
+          <button
+            mat-button
+            color="primary"
+            type="button"
+            (click)="openPasswordResetDialog()"
+          >
+            Reset Password
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <form
+          class="example-container"
+          [formGroup]="userProfileFG"
+          (submit)="updateUserProfile($event)"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input
+                  matInput
+                  formControlName="fullname"
+                  placeholder="Full Name"
+                />
+                <mat-error
+                  *ngIf="userProfileFG.get('fullname').errors?.required"
+                  >Name is required</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input matInput formControlName="email" placeholder="Email" />
+                <mat-error *ngIf="userProfileFG.get('email').errors?.email"
+                  >Email is not valid</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-select formControlName="role" placeholder="Role">
+                  <mat-option [value]="1">Super Admin</mat-option>
+                  <mat-option [value]="2">Admin</mat-option>              
+                  <mat-option [value]="3">Publisher</mat-option>
+                  <mat-option [value]="4">Advertiser</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userProfileFG.get('role').errors?.required"
+                  >Role is not valid</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row updateProfile">
+            <div class="col-md-12">
+              <button mat-raised-button color="primary" type="submit">
+                Update Profile
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- STARTING UPDATING TAGS -->
+  <div class="col-xl-6">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h3 class="card-label">Tags</h3>
+          <button mat-button color="primary" (click)="openAddTagDialog()">
+            Add or Remove
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12">
+            <mat-list *ngIf="user" #tag>
+              <mat-list-item *ngFor="let tag of userTags">
+                {{ tag.name }}
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STARTING UPDATE COMPANIES -->
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h3 class="card-label">Companies</h3>
+          <button mat-button color="primary" (click)="openAddCompanyDialog()">
+            Add or Remove
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12">
+            <mat-list *ngIf="user" #company>
+              <mat-list-item *ngFor="let company of userCompanies">
+                {{ company.name }}
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.all-super-user {
+    justify-content: flex-end !important;
+}
+
+@media (max-width: 1200px) {
+    .all-super-user {
+        justify-content: flex-start !important;
+    }
+}

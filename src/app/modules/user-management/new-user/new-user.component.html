@@ -1,0 +1,120 @@
+<div class="row" *ngIf="!hidden">
+    <!-- STARTING UPDATE PROFILE-->
+    <div class="col-xl-6">
+      <div class="card card-custom example example-compact gutter-b">
+        <div class="card-header">
+          <div class="card-title">
+            <h3 class="card-label">New Publisher Profile</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <form
+            class="example-container"
+            [formGroup]="userProfileFG"
+            #formGroupDirective="ngForm"
+            (submit)="newUserProfile($event)"
+          >
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field>
+                  <input
+                    matInput
+                    formControlName="fullname"
+                    placeholder="Full Name"
+                  />
+                  <mat-error
+                    *ngIf="userProfileFG.get('fullname').errors?.required"
+                    >Name is required</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field>
+                  <input matInput formControlName="email" placeholder="Email" />
+                  <mat-error *ngIf="userProfileFG.get('email').errors?.email"
+                    >Email is not valid</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      formControlName="password"
+                      placeholder="Password"
+                      type="password"
+                      autocomplete="off"
+                    />
+                    <mat-error
+                      *ngIf="userProfileFG.get('password').errors?.required"
+                      >Password is required</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      formControlName="cPassword"
+                      placeholder="Confirm Passsword"
+                      type="password"
+                      autocomplete="off"
+                    />
+                    <mat-error
+                      *ngIf="userProfileFG.get('cPassword').errors?.required"
+                      >Confirm Password is required</mat-error
+                    >
+                    <mat-error
+                      *ngIf="userProfileFG.controls['cPassword'].errors && userProfileFG.controls['cPassword'].errors.ConfirmPassword"
+                      >'Passsword' and 'Confirm Password' didn't match.</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-md-12">
+                <button mat-raised-button color="primary" type="submit">
+                  Create Profile
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div
+*ngIf="hidden"
+  class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+  style="background-image: url('./assets/media/error/bg3.jpg'); height: 100%;zoom: 1;
+  display: block;
+  min-height: 80vh;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #0e1724;"
+>
+  <!--begin::Content-->
+  <div
+    class="px-10 px-md-30 py-10 py-md-0 d-flex flex-column justify-content-md-center"
+  >
+    <p class="display-4 font-weight-boldest text-white mb-12">
+      How did you get here
+    </p>
+    <p class="font-size-h1 font-weight-boldest text-dark-75">
+      Sorry you can't access the page you're looking for.
+    </p>
+    <p class="font-size-h4 line-height-md">
+      There may be a misspelling in the URL entered,<br />or the page you are
+      looking for may no longer exist.
+    </p>
+  </div>
+  <!--end::Content-->
+</div>
+<!-- end:: Error -->
+  

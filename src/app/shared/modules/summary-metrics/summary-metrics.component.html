@@ -1,0 +1,47 @@
+<div class="row" *ngIf="summaryMetricsData">
+  <div class="col-xl-6">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h2 class="card-label">Month to Date Statistics</h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- <button (click)="updateAllStats()">Click Me</button> -->
+        <mat-list>
+          <mat-list-item>Revenue: $ {{summaryMetricsData['summary'][0]['summaryMetrics'][0]['revenue'] ? (summaryMetricsData['summary'][0]['summaryMetrics'][0]['revenue'] | number : '1.2-2') : "0.00" }}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Revenue Pace: $ {{summaryMetricsData['summary'][0]['summaryMetrics'][0]['revenuePace'] ? (summaryMetricsData['summary'][0]['summaryMetrics'][0]['revenuePace'] | number: '1.2-2') : "0.00" }}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Profit: $ {{summaryMetricsData['summary'][0]['summaryMetrics'][0]['profit'] ? (summaryMetricsData['summary'][0]['summaryMetrics'][0]['profit'] | number: '1.2-2') : "0.00"}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Profit Pace: $ {{summaryMetricsData['summary'][0]['summaryMetrics'][0]['profitPace'] ? (summaryMetricsData['summary'][0]['summaryMetrics'][0]['profitPace'] | number: '1.2-2') : "0.00"}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Percentage Change: {{summaryMetricsData['summary'][0]['summaryMetrics'][0]['percentPace'] ? (summaryMetricsData['summary'][0]['summaryMetrics'][0]['percentPace'] | number: '1.2-2') : "0.00"}} %</mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h2 class="card-label">Last Month Stats</h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <mat-list>
+          <mat-list-item>Revenue: $ {{summaryMetricsData['summary'][0]['lastMonthStat'][0]['revenue'] ? (summaryMetricsData['summary'][0]['lastMonthStat'][0]['revenue'] | number : '1.2-2') : "0.00" }}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Revenue Pace: $ {{summaryMetricsData['summary'][0]['lastMonthStat'][0]['revenuePace'] ? (summaryMetricsData['summary'][0]['lastMonthStat'][0]['revenuePace'] | number: '2.2-2') : "0.00"}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Profit: $ {{summaryMetricsData['summary'][0]['lastMonthStat'][0]['profit'] ? (summaryMetricsData['summary'][0]['lastMonthStat'][0]['profit'] | number: '1.2-2') : "0.00"}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Profit Pace: $ {{summaryMetricsData['summary'][0]['lastMonthStat'][0]['profitPace'] ? (summaryMetricsData['summary'][0]['lastMonthStat'][0]['profitPace'] | number: '1.2-2') : "0.00"}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Percentage Change: {{summaryMetricsData['summary'][0]['lastMonthStat'][0]['percentPace'] ? (summaryMetricsData['summary'][0]['lastMonthStat'][0]['percentPace'] | number: '1.2-2') : "0.00"}} %</mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+</div>

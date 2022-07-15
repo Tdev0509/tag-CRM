@@ -1,0 +1,9 @@
+.all-admin-user {
+    justify-content: flex-end !important;
+}
+
+@media (max-width: 1200px) {
+    .all-admin-user {
+        justify-content: flex-start !important;
+    }
+}

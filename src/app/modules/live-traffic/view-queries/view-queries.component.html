@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card card-custom example example-compact gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <h3 class="card-label">View All Queries</h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <ngx-datatable
+          class="material fullscreen"
+          [rows]="rows"
+          [columnMode]="'force'"
+          [loadingIndicator]="false"
+          [footerHeight]="50"
+          [rowHeight]="50"
+          [scrollbarH]="true"
+          [headerHeight]="50"
+          [limit]="10"
+        >
+          <ngx-datatable-column name="query">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              Query
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ip">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              IP
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>

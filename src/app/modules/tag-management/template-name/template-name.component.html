@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Template Name</h1>
+<form>
+    <div mat-dialog-content>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Template Name</mat-label>
+            <input matInput [formControl]="templateNameFormControl" [(ngModel)]="data.templateName" required="true">
+            <mat-error *ngIf="templateNameFormControl.hasError('required')">
+                Template Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+  
+    </div>
+    <div mat-dialog-actions style="justify-content: end;">
+        <button mat-raised-button color="secondary" (click)="onNoClick()">No</button>
+        <button mat-raised-button color="primary" (click)="store()">Ok</button>
+    </div>
+</form>

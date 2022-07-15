@@ -1,0 +1,25 @@
+.red {
+  color: red;
+}
+
+.normal {
+  color: black;
+}
+
+.green {
+  background-color: green;
+}
+
+.companies {
+  width: 100%;
+}
+
+.companies ul {
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+}
+
+.companies li:hover {
+  background-color: rgb(193, 193, 193);
+}

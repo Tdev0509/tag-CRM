@@ -1,0 +1,88 @@
+<form class="example-container" id="manaulUpForm" [formGroup]="manaulUpFG" (ngSubmit)="onReportSubmit()">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Report Split Update</h3>
+                    </div>
+                </div>  
+                
+                <div class="card-body">
+                    <mat-form-field>
+                        <mat-label>Tag</mat-label>
+                        <mat-select matNativeControl placeholder="Select Report" formControlName="tag" (selectionChange)="handleTag($event)">
+                          <mat-option
+                            *ngFor="let tagItem of tagData"
+                            [value]="tagItem.value"
+                          >
+                            {{ tagItem.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Enter a custom date range</mat-label>
+                        <mat-date-range-input
+                          [rangePicker]="picker"
+                          [formGroup]="range"
+                          (dateChange)="changeDatePicker()"
+                        >
+                          <input
+                            matStartDate
+                            formControlName="startDate"
+                            placeholder="Start date"
+                            required
+                          />
+                          <input
+                            matEndDate
+                            formControlName="endDate"
+                            placeholder="End date"
+                            required
+                            (dateChange)="changeDatePicker()"
+                          />
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+              
+                        <mat-error
+                          *ngIf="manaulUpFG.controls.startDate.hasError('matStartDateInvalid')"
+                          >Invalid start date</mat-error
+                        >
+                        <mat-error
+                          *ngIf="manaulUpFG.controls.endDate.hasError('matEndDateInvalid')"
+                          >Invalid end date</mat-error
+                        >
+                        <!-- Required Date Messages -->
+                        <mat-error *ngIf="manaulUpFG.controls.startDate.errors?.required">Start Date Required</mat-error>
+                        <mat-error *ngIf="manaulUpFG.controls.endDate.errors?.required">End Date Required</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field>
+                    <mat-label>Preset Date Range</mat-label>
+                    <mat-select
+                        [(ngModel)]="preSelectValue"
+                        (selectionChange)="onPreSetRangeSelectChange($event)"
+                        formControlName="preSelectValue"
+                    >
+                        <mat-option
+                        *ngFor="let dateRange of preSetDateRanges"
+                        [value]="dateRange.value"
+                        >
+                        {{ dateRange.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    <!-- update report -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <button mat-raised-button color="primary" type="submit">Update Splits</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

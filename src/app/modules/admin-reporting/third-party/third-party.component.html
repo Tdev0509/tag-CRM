@@ -1,0 +1,135 @@
+<app-reporting-filtering
+  (onDatesPicked)="updateReportingFiltering($event)"
+></app-reporting-filtering>
+
+<div id="main" style="width: 100%; height: 300px"></div>
+
+<ngx-datatable
+  #expandableTable
+  class="material fullscreen expandable"
+  style="top: 52px"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="0"
+  [rowHeight]="50"
+  [scrollbarV]="true"
+  [scrollbarH]="true"
+  [rows]="rows"
+>
+  <!-- Row Detail Template -->
+  <ngx-datatable-row-detail
+    [rowHeight]="100"
+    #myDetailRow
+    (toggle)="onDetailToggle($event)"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-row-detail-template
+    >
+      <div style="padding-left: 35px">
+        <div><strong>Address</strong></div>
+        <div>Test</div>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+  <!-- Column Templates -->
+  <ngx-datatable-column
+    [width]="50"
+    [resizeable]="false"
+    [sortable]="false"
+    [draggable]="false"
+    [canAutoResize]="false"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-cell-template
+    >
+      <a
+        href="javascript:void(0)"
+        [class.datatable-icon-right]="!expanded"
+        [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row"
+        (click)="toggleExpandRow(row)"
+      >
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- PUBLISHER NAME -->
+  <ngx-datatable-column name="name">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Publisher
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- PUBLISHER NAME -->
+  <ngx-datatable-column name="tag">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Tag
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- TOTAL SEARCHES -->
+  <ngx-datatable-column name="totalSearches">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Total Searches
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | number }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- MONETIZED SEARCHES -->
+  <ngx-datatable-column name="monetizedSearches">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Monetized Searches
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | number }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- CLICKS -->
+  <ngx-datatable-column name="clicks">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Clicks
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | number }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- CTR -->
+  <ngx-datatable-column name="CTR">
+    <ng-template
+      let-column="column"
+      let-sort="sortFn"
+      ngx-datatable-header-template
+    >
+      <span>{{ column.name }}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <strong
+        [innerHTML]="row['clicks'] / row['totalSearches'] | percent: '2.2-2'"
+      ></strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- REVENUE -->
+  <ngx-datatable-column name="revenue">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Revenue
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | currency: 'USD' }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

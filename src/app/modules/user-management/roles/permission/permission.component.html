@@ -1,0 +1,97 @@
+<div class="modal-header">
+    <h4 class="modal-title">Permission</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row justify-content-end d-flex">
+        <div class="select-all">
+            <mat-checkbox [ngStyle]="{'color': '#232428'}" class="example-margin" [indeterminate]="isIndeterminate" [checked]="allChecked" (indeterminateChange)="onIndeterminateChange($event)" (change)="onChkChange($event)">Select All</mat-checkbox>
+        </div>
+    </div>
+    <form class="example-container" [formGroup]="permissionFG">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="dashboard" class="example-margin" [(ngModel)]="dashboard" (change)="onChildChkChange($event)">Dashboard</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="layoutBuilder" class="example-margin" [(ngModel)]="layoutBuilder" (change)="onChildChkChange($event)">Layout Builder</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="googleMaterial" class="example-margin" [(ngModel)]="googleMaterial" (change)="onChildChkChange($event)">Google Material</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="ngBootstrap" class="example-margin" [(ngModel)]="ngBootstrap" (change)="onChildChkChange($event)">Ng-Bootstrap</mat-checkbox>
+                        </span>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="companyManage" class="example-margin" [(ngModel)]="companyManage" (change)="onChildChkChange($event)">Company Management</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="tagManage" class="example-margin" [(ngModel)]="tagManage" (change)="onChildChkChange($event)">Tag Management</mat-checkbox>
+                        </span>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="eCommerce" class="example-margin" [(ngModel)]="eCommerce" (change)="onChildChkChange($event)">eCommerce</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="liveTraffic" class="example-margin" [(ngModel)]="liveTraffic" (change)="onChildChkChange($event)">Live Traffic</mat-checkbox>
+                        </span>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="protectedMedia" class="example-margin" [(ngModel)]="protectedMedia" (change)="onChildChkChange($event)">Protected Media</mat-checkbox>
+                        </span>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="notifications" class="example-margin" [(ngModel)]="notifications" (change)="onChildChkChange($event)">Notifications</mat-checkbox>
+                        </span>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="userManage" class="example-margin" [(ngModel)]="userManage" (change)="onChildChkChange($event)">User Management</mat-checkbox>
+                        </span>
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <span class="example-list-section">
+                            <mat-checkbox color="primary" formControlName="reportManage" class="example-margin" [(ngModel)]="reportManage" (change)="onChildChkChange($event)">Report</mat-checkbox>
+                        </span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="activeModal.close()">Close</button>
+    <button type="button" class="btn btn-sm btn-primary"  (click)="handleSubmit()">Update</button>
+</div>

@@ -1,0 +1,429 @@
+<form class="example-container" [formGroup]="updateTagFG" (submit)="updateTag()" *ngIf="!hidden">
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="card card-custom example example-compact gutter-b">
+          <div class="card-header">
+            <div class="card-title">
+              <h3 class="card-label">Create New Tag</h3>
+            </div>
+            {{ updateTagFG.value | json }}
+          </div>
+          <div class="card-body">
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="name"
+                placeholder="Name"
+              />
+              <mat-error *ngIf="updateTagFG.get('name').errors?.required"
+                >Name is required.
+              </mat-error>
+            </mat-form-field>
+            <div class="row">
+              <div class="col-xl-4">
+                <mat-form-field>
+                  <mat-label>Advertiser</mat-label>
+                  <mat-select matNativeControl formControlName="advertiser">
+                    <mat-option
+                      *ngFor="let advertiserItem of advertiserList"
+                      [value]="advertiserItem.value"
+                    >
+                      {{ advertiserItem.viewValue }}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4">
+                <mat-form-field>
+                  <mat-label>Publisher</mat-label>
+                    <mat-select matNativeControl formControlName="publisher">
+                      <mat-option
+                      *ngFor="let publisherItem of publisherList"
+                      [value]="publisherItem.value"
+                    >
+                      {{ publisherItem.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4">
+                <mat-form-field>
+                  <mat-label>Company</mat-label>
+                  <mat-select formControlName="company" [disabled]="true">
+                    <mat-option
+                      *ngFor="let comItem of companyList"
+                      [value]="comItem.value"
+                    >
+                      {{ comItem.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+            </div>
+            
+            <div class="row">
+              <div class="col-xl-3">
+                <mat-form-field>
+                  <mat-label>Browsers Status</mat-label>
+                  <mat-select matNativeControl (selectionChange)="handleBrowserStatus($event)" [(ngModel)]="selectBrowserStatus" formControlName="browserStatus">
+                    <mat-option value="true">Allowed</mat-option>
+                    <mat-option value="false">Not Allowed</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-9">
+                <mat-form-field>
+                  <mat-label>Browsers</mat-label>
+                  <mat-select matNativeControl (selectionChange)="getBrowers($event)" formControlName="browser" multiple>
+                    <mat-option value="Any">Any</mat-option>
+                    <mat-option value="Chrome">Chrome</mat-option>
+                    <mat-option value="Firefox">Firefox</mat-option>
+                    <mat-option value="Edge">Edge</mat-option>
+                    <mat-option value="Internet Explorer">Internet Explorer</mat-option>
+                    <mat-option value="Opera">Opera</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-3">
+                <mat-form-field>
+                  <mat-label>Device Type Status</mat-label>
+                  <mat-select matNativeControl (selectionChange)="handleDeviceTypeStatus($event)" [(ngModel)]="selectDeviceTypeStatus" formControlName="deviceTypeStatus">
+                    <mat-option value="true">Allowed</mat-option>
+                    <mat-option value="false">Not Allowed</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-9">
+                <mat-form-field>
+                  <mat-label>Device Type</mat-label>
+                  <mat-select matNativeControl formControlName="deviceType" multiple>
+                    <mat-option value="Any">Any</mat-option>
+                    <mat-option value="Desktop">Desktop</mat-option>
+                    <mat-option value="Mobile">Mobile</mat-option>              
+                    <mat-option value="Tablet">Tablet</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-3">
+                <mat-form-field>
+                  <mat-label>Browser Version Status</mat-label>
+                  <mat-select matNativeControl (selectionChange)="handleVersionStatus($event)" [(ngModel)]="selectVersionStatus" formControlName="versionStatus">
+                    <mat-option value="true">Allowed</mat-option>
+                    <mat-option value="false">Not Allowed</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-9">
+                <mat-form-field>
+                  <mat-label>Browser Version</mat-label>
+                  <mat-select matNativeControl formControlName="version" multiple>
+                    <mat-option
+                      *ngFor="let browserVersion of browserVersions"
+                      [value]="browserVersion.value"
+                    >
+                      {{ browserVersion.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-3">
+                <mat-form-field>
+                  <mat-label>Country Status</mat-label>
+                  <mat-select matNativeControl (selectionChange)="handleCountryStatus($event)" [(ngModel)]="selectCountryStatus" formControlName="countryStatus">
+                    <mat-option value="true">Allowed</mat-option>
+                    <mat-option value="false">Not Allowed</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-9">
+                <mat-form-field>
+                  <mat-label>Country Allowed</mat-label>
+                  <mat-select matNativeControl formControlName="country" multiple>
+                    <mat-option value="Any">Any</mat-option>
+                    <mat-option
+                      *ngFor="let country of countries"
+                      [value]="country.value"
+                    >
+                      {{ country.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field>
+              <mat-label>Ad Server URL</mat-label>
+              <mat-select formControlName="adServerUrl">
+                <mat-option
+                *ngFor="let serverUrl of adServerUrlList"
+                [value]="serverUrl.value"
+              >
+                {{ serverUrl.viewValue }}
+              </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="row">
+              <div class="col-xl-6">
+                <mat-form-field>
+                  <mat-label>Stat Type</mat-label>
+                  <mat-select formControlName="statType">
+                    <mat-option
+                      *ngFor="let statType of statTypes"
+                      [value]="statType.value"
+                    >
+                      {{ statType.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6">
+                <mat-form-field>
+                  <mat-label>Rotation Type</mat-label>
+                  <mat-select formControlName="rotationType">
+                    <mat-option
+                      *ngFor="let rotationType of rotationTypes"
+                      [value]="rotationType.value"
+                    >
+                      {{ rotationType.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="card card-custom example example-compact gutter-b">
+          <div class="card-header">
+            <div class="card-title">
+              <h3 class="card-label">Tag URLs</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- URL INPUT START -->
+            <mat-form-field>
+              <input
+                matInput
+                [(ngModel)]="url"
+                formControlName="url"
+                placeholder="Final URL"
+                (ngModelChange)="getUrlParams($event)"
+              />
+              <mat-error *ngIf="updateTagFG.get('url').errors?.required"
+                >Final URL is required.
+              </mat-error>
+            </mat-form-field>
+            <!-- URL INPUT END -->
+  
+            <!-- FORM ARRAY PARAMS START -->
+            <div formArrayName="params">
+              <div *ngFor="let p of params.controls; index as i" class="params row" [formGroupName]="i">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      formControlName="key"
+                      placeholder="Final Key"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      formControlName="value"
+                      placeholder="Final Value"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-label>Param Type</mat-label>
+                    <mat-select
+                      formControlName="paramType"
+                      (selectionChange)="updateInitialParams($event, i)"
+                    >
+                      <mat-option
+                        *ngFor="let paramType of paramTypes"
+                        [value]="paramType.value"
+                      >
+                        {{ paramType.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      formControlName="initialParam"
+                      placeholder="Inital Value"
+                      (keyup)="updateInitialParamURL($event, i)"
+                    />
+                  </mat-form-field>
+                </div>
+                
+              </div>
+            </div>
+            <p>Inital URL: <br />{{ decodeURL(initialURL) }}</p>
+            <!-- FORM ARRAY PARAMS END -->
+          </div>
+        </div>
+        <div class="card card-custom example example-compact gutter-b">
+          <div class="card-header">
+            <div class="card-title">
+              <h3 class="card-label">SubIds</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="numeric-title pb-5">
+              <h6 class="align-self-end d-flex">Add Range of SUBIDs (Numeric Only)</h6>
+              <button type="button" class="btn btn-sm btn-primary" (click)="addRange()">
+                Add Range
+              </button>
+            </div>
+            <div class="row">
+              <div class="col-xl-3">
+                <mat-form-field>
+                  <mat-label>Filter Tag</mat-label>
+                  <mat-select matNativeControl formControlName="numFilterTag">
+                    <mat-option value="StartsWith">Starts With</mat-option>
+                    <mat-option value="EndsWith">Ends With</mat-option>
+                    <mat-option value="Contains">Contains</mat-option>              
+                    <mat-option value="ExactValue">Exact Value</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4">
+                <mat-form-field>
+                  <input matInput placeholder="Subid(Add Range of SUBIDs (Numeric Only))" formControlName="numSubid" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-2">
+                <mat-form-field>
+                  <input matInput placeholder="Limit" formControlName="numLimit" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-2">
+                <mat-form-field>
+                  <input matInput placeholder="Split" formControlName="numSplit" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row pb-4">
+              <div class="col-md-3">
+                <button type="button" class="btn btn-sm btn-primary" (click)="addSubid($event)">
+                  Add Subid
+                </button>
+              </div>           
+            </div>
+            <div formArrayName="subids">
+              <div class="row" *ngFor="let subItem of subids.controls; let i=index" [formGroupName]="i">
+                <div class="col-xl-3">
+                  <mat-form-field>
+                    <mat-label>Filter Tag</mat-label>
+                    <mat-select matNativeControl formControlName="filterTag">
+                      <mat-option value="StartsWith">Starts With</mat-option>
+                      <mat-option value="EndsWith">Ends With</mat-option>
+                      <mat-option value="Contains">Contains</mat-option>              
+                      <mat-option value="ExactValue">Exact Value</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="subItem.get('filterTag').errors?.required">
+                      Filter Tag is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4">
+                  <mat-form-field>
+                    <input matInput placeholder="Subid" formControlName="subid" />
+                    <mat-error *ngIf="subItem.get('subid').errors?.required">
+                      Subid is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2">
+                  <mat-form-field>
+                    <input matInput placeholder="Limit" formControlName="limit" />
+                    <mat-error *ngIf="subItem.get('limit').errors?.required">
+                      Limit is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2">
+                  <mat-form-field>
+                    <input matInput placeholder="Split" formControlName="split" />
+                    <mat-error *ngIf="subItem.get('split').errors?.required">
+                      Split is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-xl-1">
+                  <a title="Delete Tag" class="btn btn-icon btn-light btn-hover-danger btn-sm" (click)="removeSubid(i)">
+                    <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="false"
+                      class="svg-icon svg-icon-md svg-icon-danger">
+                    </span>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- SAVING TAG -->
+    <div class="row">
+      <div class="col-md-6">
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
+      <!-- <div class="col-md-6">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="updateTag()"
+        >
+          Update as Template
+        </button>
+      </div> -->
+    </div>
+  </form>
+<!-- begin:: Error -->
+<div
+*ngIf="hidden"
+  class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+  style="background-image: url('./assets/media/error/bg3.jpg'); height: 100%;zoom: 1;
+  display: block;
+  min-height: 80vh;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #0e1724;"
+>
+  <!--begin::Content-->
+  <div
+    class="px-10 px-md-30 py-10 py-md-0 d-flex flex-column justify-content-md-center"
+  >
+    <p class="display-4 font-weight-boldest text-white mb-12">
+      How did you get here
+    </p>
+    <p class="font-size-h1 font-weight-boldest text-dark-75">
+      Sorry you can't access the page you're looking for.
+    </p>
+    <p class="font-size-h4 line-height-md">
+      There may be a misspelling in the URL entered,<br />or the page you are
+      looking for may no longer exist.
+    </p>
+  </div>
+  <!--end::Content-->
+</div>
+<!-- end:: Error -->
+  

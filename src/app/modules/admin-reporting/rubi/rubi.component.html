@@ -1,0 +1,135 @@
+<app-reporting-filtering
+  (onDatesPicked)="updateReportingFiltering($event)"
+></app-reporting-filtering>
+
+<!--Chart Data Show-->
+<app-reporting-revenue-chart *ngIf="chartData"
+  [chartData]="chartData"
+></app-reporting-revenue-chart>
+
+<app-summary-metrics *ngIf="summaryMetrics" [summaryMetricsData]="summaryMetrics"></app-summary-metrics>
+
+<ngx-datatable
+  #expandableTable
+  class="material fullscreen expandable"
+  style="top: 30px; height: 500px"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="0"
+  [rowHeight]="50"
+  [scrollbarV]="true"
+  [rows]="rows"
+  [loadingIndicator]="loadingIndicator"
+>
+  <!-- Row Detail Template -->
+  <ngx-datatable-row-detail
+    [rowHeight]="100"
+    #myDetailRow
+    (toggle)="onDetailToggle($event)"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-row-detail-template
+    >
+      <div style="padding-left: 35px">
+        <div><strong>Address</strong></div>
+        <div>Test</div>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <!-- Column Templates -->
+  <ngx-datatable-column
+    [width]="30"
+    [resizeable]="false"
+    [sortable]="false"
+    [draggable]="false"
+    [canAutoResize]="false"
+  >
+    <ng-template
+      let-row="row"
+      let-expanded="expanded"
+      ngx-datatable-cell-template
+    >
+      <a
+        href="javascript:void(0)"
+        [class.datatable-icon-right]="!expanded"
+        [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row"
+        (click)="toggleExpandRow(row)"
+      >
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Date -->
+  <ngx-datatable-column name="date" [minWidth]="100">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Date
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | date }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- SUBID -->
+  <ngx-datatable-column name="subid">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Subid
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- SUBID -->
+  <ngx-datatable-column name="publisher" [minWidth]="100">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Publisher
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- SEARCHES -->
+  <ngx-datatable-column name="searches">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Searches
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | number }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- CLICKS -->
+  <ngx-datatable-column name="clicks">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Clicks
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | number }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- REVENUE -->
+  <ngx-datatable-column name="revenue">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Revenue
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ value | currency: 'USD' }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- SPLIT -->
+  <ngx-datatable-column name="split" [minWidth]="35">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Split
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{ (value | number) || (0 | number: '1.0-0') }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

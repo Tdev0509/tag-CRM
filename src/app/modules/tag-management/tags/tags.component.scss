@@ -1,0 +1,13 @@
+:host {
+    height: 100%;
+  }
+
+.tag-btn {
+    justify-content: flex-end !important;
+}
+
+@media (max-width: 1200px) {
+    .tag-btn {
+        justify-content: flex-start !important;
+    }
+}

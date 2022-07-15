@@ -1,0 +1,52 @@
+<!--begin::Companies-->
+<div class="dropdown" ngbDropdown placement="bottom-right" [autoClose]="true">
+  <!--begin::Toggle-->
+  <div
+    ngbDropdownToggle
+    class="topbar-item"
+    data-toggle="dropdown"
+    data-offset="10px,0px"
+  >
+    <div class="btn btn-clean btn-dropdown btn-lg mr-1">
+      <span class="menu-text">
+        {{ selectedCompany ? selectedCompany.name :  "No Company" }} 
+        <span class="caret"></span>
+      </span>
+      <i class="menu-arrow"></i>
+      <span class="glyphicon glyphicon-triangle-top"></span>
+    </div>
+  </div>
+  <!--end::Toggle-->
+
+  <!--begin::Dropdown-->
+  <div
+    ngbDropdownMenu
+    class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm companies"
+  >
+    <ng-container *ngIf="userCompanies">
+      <ul class="navi navi-hover py-4">
+        <li class="navi-item">
+          <a
+            href="javascript:void(0);"
+            (click)="setCompanyWithRefresh('')"
+            class="navi-link"
+            ><span class=" navi-text">No company</span></a>
+        </li>
+        <ng-container *ngFor="let company of userCompanies">
+          
+          <li class="navi-item" [ngClass]="{'active': company.active}">
+            <a
+              href="javascript:void(0);"
+              (click)="setCompanyWithRefresh(company._id)"
+              [ngClass]="{'active': company.active}"
+              class="navi-link"
+              ><span class=" navi-text">{{company.name}}</span></a>
+          </li>
+        </ng-container>
+        
+      </ul>
+    </ng-container>
+  </div>
+  <!--end::Dropdown-->
+</div>
+<!--end::Languages-->
